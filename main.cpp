@@ -12,11 +12,10 @@ int main()
     string op;
     cout<<"Enter x and y: ";
     cin>>x>>y;
-    cout<<"What operation to perform (add, subtract, multiply, divide, equals): ";
+    cout<<"What operation to perform (+, -, *, /, ==): ";
     cin>>op;
     cout<<"Enter x2 and y2: ";
     cin>>x2>>y2;
-
     Complex a;
     Complex b;
 
@@ -25,17 +24,16 @@ int main()
     b.setReal(x2);
     b.setImaginary(y2);
 
-    if(op=="add")
+    if(op=="+")
     (a+b).print();
-    else if(op=="subtract")
+    else if(op=="-")
     (a-b).print();
-    else if(op=="multiply")
+    else if(op=="*")
     (a*b).print();
-    else if(op=="divide")
+    else if(op=="/")
     (a/b).print();
-    else if(op=="equals")
-    cout<<"Are they equal (True/False)"<<(a==b);
-    
+    else if(op=="==")
+    cout<<"Are they equal (True/False): "<<(a==b)<<endl;
     
     return 0;
 }
