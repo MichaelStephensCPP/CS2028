@@ -1,7 +1,18 @@
+// Data Structures Laboratory
+// Section 004
+// Lab 5
+// 10/3/2019
+// Group 6
+// Group Members: Anh Nguyen and Michael Stephens
+
 #ifndef shelf_h
 #define shelf_h
 
 #include "BaseClassGame.h"
+#include "fullShelf.h"
+#include "emptyShelf.h"
+#include "DerivedClassBoardGame.h"
+#include "DerivedClassVideoGame.h"
 #include <iostream>
 #include <array>
 using namespace std;
@@ -12,7 +23,7 @@ class shelf
 {
     public:
   
-
+    bool isEmpty;
     shelf()
     {
         for(int i=0;i<games.size();i++)
@@ -24,28 +35,31 @@ class shelf
 
     void add(game game)
     {
-        // if(games[games.size()].getNumPlayers()>0 || game.getScore()>0)
-        // {
-        //     cout<<"\nERROR: FullShelf exception";
-        //     return;
-        // }
-
+        fullShelf s;
+        if(numStored==games.size())
+        {
+            throw s;
+            return;
+        }
         games[numStored]=game;
         numStored+=1;
     }
 
     game remove()
     {
-        // if(numStored==0)
-        // {
-        //     cout<<"\nERROR: EmptyShelf exception";
-        // }
+        emptyShelf s;
+        if(numStored==0)
+        {
+            throw s;
+            return game{};
+        }
+        
         game temp=games[numStored-1];
         games[numStored]=game{};
         if(numStored>0)
         numStored-=1;  
 
-        cout<<"\nThe values for the removed game were as follows \nSize: "<<"\nNumber of players: "<<temp.getNumPlayers()<<"\nScore: "<<temp.getScore()<<"\n";
+        cout<<"\nThe values for the removed game were as follows... \nNumber of players: "<<temp.getNumPlayers()<<"\nScore: "<<temp.getScore()<<"\n";
 
         return temp;
     }
