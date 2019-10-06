@@ -1,8 +1,17 @@
+// Data Structures Laboratory
+// Section 004
+// Lab 5
+// 10/3/2019
+// Group 6
+// Group Members: Anh Nguyen and Michael Stephens
+
 #include <iostream>
 #include "shelf.h"
 #include "BaseClassGame.h"
 #include "DerivedClassBoardGame.h"
 #include "DerivedClassVideoGame.h"
+#include "fullShelf.h"
+#include "emptyShelf.h"
 using namespace std;
 
 int main()
@@ -21,21 +30,34 @@ int main()
         int numPlayers;
         int score;
         game* b=new boardgame;
-        cout<<"\nEnter board size: ";
-        cin>>size;
-        cout<<"Enter number of players: ";
+
+        cout<<"\nEnter number of players: ";
         cin>>numPlayers;
         cout<<"Enter score: ";
         cin>>score;
-        //b->setSize(size);
         b->setNumPlayers(numPlayers);
         b->setScore(score);
 
-        a.add(*b);
+        try
+        {
+            a.add(*b);
+        }
+        catch(const fullShelf& e)
+        {
+            cout<<e.what()<<'\n';
+        }
+        
     }
     else if(choice==2)
     {
-        a.remove();
+        try
+        {
+            a.remove();
+        }
+        catch(const emptyShelf& e)
+        {
+            cout << e.what() << '\n';
+        }
     }
     else if(choice==3)
     {
