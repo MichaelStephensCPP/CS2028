@@ -18,7 +18,8 @@ int main()
 
     for(int i=0;i<numDisks; i++)
     {
-        disks[i]=i+1;
+        // disks[i]=i+1;
+        disks[i]=numDisks-i;
     }
 
     int zero=0;
@@ -30,15 +31,16 @@ int main()
         stack3.push(&zero);
     }
 
-    char tower;
-    int piece;
-    int towermove;
+    stack1.pop();
 
     for(int i=0;i<numDisks;i++)
     {
         stack2.pop();
         stack3.pop();
     }
+    
+    char tower;
+    int towermove;
 
     while(1)
     {
@@ -55,39 +57,15 @@ int main()
 
         cout<<"Enter tower: ";
         cin>>tower;
-        cout<<"Enter piece number: ";
-        cin>>piece;
+
         cout<<"Enter tower to move to: ";
         cin>>towermove;
 
         if(tower=='A')
         {
-            stack1.pop();
-        }
-        else if(tower=='B')
-        {
-            stack2.pop();
-        }
-        else if(tower=='C')
-        {
-            stack3.pop();
+            stack2.push(stack1.pop());
         }
 
-        if(towermove=='A')
-        {
-            stack1.pop();
-            stack1.push(&piece);
-        }
-        else if(towermove=='B')
-        {
-            stack2.pop();
-            stack2.push(&piece);
-        }
-        else if(towermove=='C')
-        {
-            stack3.pop();
-            stack3.push(&piece);
-        }
     }
 
     return 0;
