@@ -3,7 +3,7 @@ using namespace std;
 
 class Clock
 {
-    public:
+public:
     Clock(){};
     Clock(int sec)
     {
@@ -11,40 +11,40 @@ class Clock
         minutes=0;
         hours=0;
 
-        if(sec%60 > 1)
-        {
-            seconds=sec%60;
-            minutes=(sec-(sec%60))/60;
-
-            if(minutes%60 > 1)
-            {
-                int temp=minutes;
-                minutes=minutes%60;
-                hours=(temp-(temp%60))/60;
-            }
-        }
+    hours=sec/3600;
+    sec-=hours*3600;
+    minutes=sec/60;
+    sec-=minutes*60;
+    seconds=sec;
     }
-
+    
+    Clock (int hour, int minute, int second){
+        hours = hour;
+        minutes = minute;
+        seconds = second;
+    }
+    
     void dispTime()
     {
         if(hours<10)
-        {
-            cout<<"0"<<hours<<"::"<<minutes<<"::"<<seconds<<endl;
-        }
-        else if (minutes<10)
-        {
-            cout<<hours<<"::"<<"0"<<minutes<<"::"<<seconds<<endl;
-        }
-        else if(seconds<10)
-        {
-            cout<<hours<<"::"<<minutes<<"::"<<"0"<<seconds<<endl;
-        }
+            cout << "0" << hours;
         else
-        {
-            cout<<hours<<"::"<<minutes<<"::"<<seconds<<endl;
-        }
+            cout << hours;
+        
+        cout << "::";
+        if(minutes<10)
+            cout << "0" << minutes;
+        else
+            cout << minutes;
+        
+        cout << "::";
+        if(seconds<10)
+            cout << "0" << seconds;
+        else
+            cout << seconds;
+        cout << endl;
     }
-
+    
     void add(int sec)
     {
         seconds+=sec;
@@ -53,20 +53,13 @@ class Clock
         int minutesec=minutes*60;
         sec+=hoursec+minutesec;
 
-        if(sec%60 > 1)
-        {
-            seconds=sec%60;
-            minutes=(sec-(sec%60))/60;
-
-            if(minutes%60 > 1)
-            {
-                int temp=minutes;
-                minutes=minutes%60;
-                hours=(temp-(temp%60))/60;
-            }
-        }
+        hours=sec/3600;
+        sec-=hours*3600;
+        minutes=sec/60;
+        sec-=minutes*60;
+        seconds=sec;
     }
-
+    
     void subtract(int sec)
     {
         seconds-=sec;
@@ -74,52 +67,45 @@ class Clock
         int hoursec=hours*3600;
         int minutesec=minutes*60;
         sec+=hoursec+minutesec;
-
-        if(sec%60 > 1)
-        {
-            seconds=sec%60;
-            minutes=(sec-(sec%60))/60;
-
-            if(minutes%60 > 1)
-            {
-                int temp=minutes;
-                minutes=minutes%60;
-                hours=(temp-(temp%60))/60;
-            }
-        }
+        
+        hours=sec/3600;
+        sec-=hours*3600;
+        minutes=sec/60;
+        sec-=minutes*60;
+        seconds=sec;
     }
-
+    
     int getSeconds()
     {
         return seconds;
     }
-
+    
     int getMinutes()
     {
         return minutes;
     }
-
+    
     int getHours()
     {
         return hours;
     }
-
+    
     void setSeconds(int s)
     {
         seconds=s;
     }
-
+    
     void setMinutes(int m)
     {
         minutes=m;
     }
-
+    
     void setHours(int h)
     {
         hours=h;
     }
-
-    private:
+    
+private:
     int seconds;
     int minutes;
     int hours;
@@ -127,11 +113,8 @@ class Clock
 
 int main()
 {
-    Clock b(10000);
+    Clock b(25200);
     b.dispTime();
-    b.add(10000);
-    b.dispTime();
-    b.subtract(10000);
-    b.dispTime();
+
     return 0;
 }
