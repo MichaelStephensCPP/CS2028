@@ -1,0 +1,62 @@
+.data
+array1: .space 20
+array2: .space 16
+.text
+la $t0, array1
+li $t1, 2
+sw $t1, 0($t0)
+li $t1, 29
+sw $t1, 4($t0)
+li $t1, 2020
+sw $t1, 8($t0)
+li $t1, 11
+sw $t1, 12($t0)
+li $t1, 0
+sw $t1, 16($t0)
+
+lw $t1,0($t0)
+lw $t2,4($t0)
+lw $t3,8($t0)
+lw $t4,4($t0)
+lw $t5,8($t0)
+lw $t6,12($t0)
+
+add $s0,$t1,$t2
+add $s1,$t2,$t3
+add $s2,$t3,$t4
+add $s3,$t4,$t5
+
+la $t0, array2
+sw $s0, 0($t0)
+la $t0, array2
+sw $s1, 4($t0)
+la $t0, array2
+sw $s2, 8($t0)
+la $t0, array2
+sw $s3, 12($t0)
+
+lw $t0, 0($t0)
+li $v0, 1
+move $a0, $t0
+syscall
+
+la $t0, array2
+lw $t1, 4($t0)
+li $v0, 1
+move $a0, $t1
+syscall
+
+la $t0, array2
+lw $t1, 8($t0)
+li $v0, 1
+move $a0, $t2
+syscall
+
+la $t0, array2
+lw $t1, 12($t0)
+li $v0, 1
+move $a0, $t3
+syscall
+
+
+
